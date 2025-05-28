@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" />
+  <title>Web Application Development </title>
+  <!--I_Used_Bootstrap_Icons  -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+  body {
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+  font-family: Arial;
+}
+
+.tools {
+  background: #243b61;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tools button {
+  background: none;
+  border: none;
+  color: #bfc0c0;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.tools button:hover,
+.tools button.active {
+  color: #ffffff;
+}
+
+.color-picker {
+  width: 16px;
+  height: 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  bottom: -10px; 
+  display:block;
+  position: absolute; 
+  right:2px;
+  left:0px;
+}
+
+.edit {
+  background: #fff;
+  min-height: 300px;
+  margin: 5px 20px 20px 20px;
+  padding: 18px;
+  border-radius: 8px ;
+  border: 1px solid #d1d1d1;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.edit:empty:before {
+  content: attr(data-placeholder);
+  color: #b5b3b3;
+  font-style: italic;
+  pointer-events: none;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+  <div class="tools">
+  <button id="bold" title="Bold"><i class="bi bi-type-bold"></i></button>
+  <button id="underline" title="Underline"><i class="bi bi-type-underline"></i></button>
+  <button id="italic" title="Italic"><i class="bi bi-type-italic"></i></button>
+  <span style="color: #eef1f3; position: relative;">
+  A<input type="color" id="fontColor" title="Font Color" class="color-picker">
+</span> 
+  <button id="alignLeft" title="Align Left"><i class="bi bi-text-left"></i></button>
+  <button id="alignCenter" title="Align Center"><i class="bi bi-text-center"></i></button>
+  <button id="alignRight" title="Align Right"><i class="bi bi-text-right"></i></button>
+  <button id="alignJustify" title="Justify"><i class="bi bi-justify"></i></button>
+  <button id="undo" title="Undo"><i class="bi bi-arrow-counterclockwise"></i></button>
+  <button id="redo" title="Redo"><i class="bi bi-arrow-clockwise"></i></button>
+  <button id="clear" title="Clear All"><i class="bi bi-x-circle"></i></button>
+</div>
+
+<div id="edit" class="edit" contenteditable="true" data-placeholder="Type your text here..."></div>
+  <script>
+
+const edit = document.getElementById('edit');
+
+const boldButton = document.getElementById('bold');
+const underlineButton = document.getElementById('underline');
+const italicButton = document.getElementById('italic');
+const fontColor = document.getElementById('fontColor');
+const alignLeftButton = document.getElementById('alignLeft');
+const alignCenterButton = document.getElementById('alignCenter');
+const alignRightButton = document.getElementById('alignRight');
+const alignJustifyButton = document.getElementById('alignJustify');
+const undoButton = document.getElementById('undo');
+const redoButton = document.getElementById('redo');
+const clearButton = document.getElementById('clear');
+
+boldButton.onclick = function() {
+  document.execCommand('bold');
+  edit.focus();
+}
+
+underlineButton.onclick = function() {
+  document.execCommand('underline');
+  edit.focus();
+}
+
+italicButton.onclick = function() {
+  document.execCommand('italic');
+  edit.focus();
+}
+
+fontColor.oninput = function() {
+  document.execCommand('foreColor', false, fontColor.value);
+  edit.focus();
+}
+
+alignLeftButton.onclick = function() {
+  document.execCommand('justifyLeft');
+  edit.focus();
+}
+
+alignCenterButton.onclick = function() {
+  document.execCommand('justifyCenter');
+  edit.focus();
+}
+
+alignRightButton.onclick = function() {
+  document.execCommand('justifyRight');
+  edit.focus();
+}
+
+alignJustifyButton.onclick = function() {
+  document.execCommand('justifyFull');
+  edit.focus();
+}
+
+undoButton.onclick = function() {
+  document.execCommand('undo');
+  edit.focus();
+}
+
+redoButton.onclick = function() {
+  document.execCommand('redo');
+  edit.focus();
+}
+
+clearButton.onclick = function () {
+  edit.innerHTML = ""; 
+  edit.focus();        
+};
+  </script>
+</body>
+</html>
